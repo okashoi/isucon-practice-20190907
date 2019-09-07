@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+    reverse_proxy:
+        image: nginx:1.17
+        volumes:
+          - "$PWD/etc/nginx/nginx.conf:/etc/nginx/nginx.conf"
+        ports:
+          - "80:80"
+
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile_go
+        command: "./torb"
+        environment:
+            GOPATH: "/go"
+            DB_DATABASE: torb
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_USER: isucon
+            DB_PASS: isucon
+
+    db:
+        image: mysql:5.6
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_ROOT_PASSWORD: ""
+            MYSQL_DATABASE: "torb"
+            MYSQL_USER: "isucon"
+            MYSQL_PASSWORD: "isucon"
+        volumes:
+            - "$PWD/dump.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz"
+        ports:
+          - "3306:3306"
