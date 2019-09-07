@@ -22,12 +22,14 @@ services:
             DB_PASS: isucon
 
     db:
-        image: mysql:5.5
+        image: mysql:5.6
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
             MYSQL_ROOT_PASSWORD: ""
             MYSQL_DATABASE: "torb"
             MYSQL_USER: "isucon"
             MYSQL_PASSWORD: "isucon"
+        volumes:
+            - "$PWD/dump.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz"
         ports:
           - "3306:3306"
