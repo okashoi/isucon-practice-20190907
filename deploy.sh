@@ -17,3 +17,6 @@ sudo systemctl daemon-reload
 sudo systemctl start mariadb
 sudo systemctl start h2o
 sudo systemctl start torb.go
+
+# slow query ログの設定が反映されないので、直接セットする
+mysql -uroot < set-slow-query.sql
