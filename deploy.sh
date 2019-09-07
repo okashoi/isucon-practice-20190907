@@ -1,6 +1,5 @@
 #!/bin/bash -eu
 
-git pull
 cd /home/isucon/torb/webapp/go && make
 
 sudo systemctl stop torb.go
