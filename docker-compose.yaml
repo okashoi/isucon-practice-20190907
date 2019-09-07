@@ -15,13 +15,18 @@ services:
         command: "./torb"
         environment:
             GOPATH: "/go"
+            DB_DATABASE: torb
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_USER: isucon
+            DB_PASS: isucon
 
     db:
         image: mysql:5.5
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
             MYSQL_ROOT_PASSWORD: ""
-            MYSQL_DATABASE: "isucon"
+            MYSQL_DATABASE: "torb"
             MYSQL_USER: "isucon"
             MYSQL_PASSWORD: "isucon"
         ports:
