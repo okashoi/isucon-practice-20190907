@@ -1,0 +1,9 @@
+FROM golang:1.12-alpine
+
+RUN apk add --no-cache make git
+
+COPY ./webapp/go/ /go/src/app
+
+WORKDIR /go/src/app
+
+RUN make setup dev-build
